@@ -1,0 +1,20 @@
+version: '3'
+services:
+  grpc-server:
+    image: my-grpc-server-image:latest
+    ports:
+      - "50051:50051"
+    networks:
+      -  my-network
+
+  http-server:
+    image: my-http-server-image:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - grpc-server
+    networks:
+      - my-network
+
+networks:
+  my-network:
